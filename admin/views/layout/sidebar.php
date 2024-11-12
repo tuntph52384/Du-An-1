@@ -36,7 +36,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-th" style="color: black"></i>
             <p style="color: black">
              Quản lý danh mục sản phẩm
@@ -45,7 +45,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-paw" style="color: black"></i>
             <p style="color: black">
              Quản lý sản phẩm
@@ -54,7 +54,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar" style="color: black"></i>
             <p style="color: black">
              Quản lý đơn hàng
@@ -63,7 +63,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang' ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-user" style="color: black"></i>
             <p style="color: black">
               Quản lý tài khoản khách hàng

@@ -36,7 +36,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN .'?act=danh-muc' ?>" class="nav-link">
             <i class="nav-icon fas fa-th" style="color: black"></i>
             <p style="color: black">
              Quản lý danh mục sản phẩm
@@ -66,7 +66,7 @@
           <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-user" style="color: black"></i>
             <p style="color: black">
-              Quản lý tài khoản khách hàng
+              Quản lý tài khoản
             </p>
           </a>
         </li>

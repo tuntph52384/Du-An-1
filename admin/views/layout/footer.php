@@ -1,6 +1,6 @@
-<footer class="main-footer"style="background-color: pink;">
+<footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      By <b>Nhom 11</b>
+      By <b>Nhom 3</b>
     </div>
     <strong>Nước Hoa Dior</strong>
   </footer>

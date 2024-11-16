@@ -27,14 +27,17 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm danh mục sản phẩm</h3>
+                            <h3 class="card-title">Sửa danh mục sản phẩm</h3>
                         </div>
 
-                        <form action="<?= BASE_URL_ADMIN . '?act=them-danh-muc' ?>" method="POST">
+                        <form action="<?= BASE_URL_ADMIN . '?act=sua-danh-muc' ?>" method="post">
+
+                            <input type="text" name="id" value="<?= $danhMuc['id'] ?>" hidden>
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
-                                    <input type="text" class="form-control" name="ten_danh_muc" placeholder="Nhập tên danh mục">
+                                    <input type="text" class="form-control" name="ten_danh_muc" value="<?= $danhMuc['ten_danh_muc'] ?>" placeholder="Nhập tên danh mục">
                                     <?php if (isset($errors['ten_danh_muc'])) { ?>
                                         <p class="text-danger"><?= $errors['ten_danh_muc'] ?></p>
                                     <?php } ?>
@@ -42,9 +45,13 @@
 
                                 <div class="form-group">
                                     <label>Mô tả</label>
-                                    <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả"></textarea>
+                                    <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả"><?= $danhMuc['mo_ta'] ?></textarea>
                                 </div>
-                      
+                                <div class="form-group">
+                                    <label for="ngay_tao">Ngày tạo</label>
+                                    <input type="text" class="form-control" name="ngay_tao" id="ngay_tao" value="<?=$danhMuc['ngay_tao'] ?>" readonly>
+                                </div>
+
                             </div>
 
                             <div class="card-footer">

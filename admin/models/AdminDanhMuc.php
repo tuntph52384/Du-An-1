@@ -18,16 +18,15 @@ class AdminDanhMuc
         }
     }
 
-    public function insertDanhMuc($ten_danh_muc, $mo_ta, $ngay_tao)
+    public function insertDanhMuc($ten_danh_muc, $mo_ta)
     {
 
         try {
-            $sql = "INSERT INTO danh_mucs (ten_danh_muc, mo_ta, ngay_tao) VALUES (:ten_danh_muc, :mo_ta, :ngay_tao)";
+            $sql = "INSERT INTO danh_mucs (ten_danh_muc, mo_ta) VALUES (:ten_danh_muc, :mo_ta)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
                 ":ten_danh_muc" => $ten_danh_muc,
                 ":mo_ta" => $mo_ta,
-                ":ngay_tao" => $ngay_tao,
 
             ]);
             return true;
@@ -48,17 +47,16 @@ class AdminDanhMuc
         }
     }
 
-    public function updateDanhMuc($id, $ten_danh_muc, $mo_ta, $ngay_tao)
+    public function updateDanhMuc($id, $ten_danh_muc, $mo_ta)
     {
         try {
-            $sql = "UPDATE danh_mucs SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta, ngay_tao = :ngay_tao WHERE id= :id ";
+            $sql = "UPDATE danh_mucs SET ten_danh_muc = :ten_danh_muc, mo_ta = :mo_ta WHERE id= :id ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
 
                 "id" => $id,
                 "ten_danh_muc" => $ten_danh_muc,
                 "mo_ta" => $mo_ta,
-                "ngay_tao" => $ngay_tao,
             ]);
             return true;
         } catch (Exception $e) {

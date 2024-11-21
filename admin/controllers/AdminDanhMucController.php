@@ -22,9 +22,6 @@
             $ten_danh_muc = $_POST['ten_danh_muc'];
             $mo_ta = $_POST['mo_ta'];
 
-            date_default_timezone_set('Asia/Ho_Chi_Minh');  // Thêm múi giờ Việt Nam
-            $ngay_tao = date('Y-m-d H:i:s');
-
 
             $errors =[];
             if(empty($ten_danh_muc)){
@@ -32,7 +29,7 @@
             }
 
             if(empty($errors)){
-                $this->modelDanhMuc->insertDanhMuc($ten_danh_muc, $mo_ta, $ngay_tao);
+                $this->modelDanhMuc->insertDanhMuc($ten_danh_muc, $mo_ta);
                 header("Location: ".BASE_URL_ADMIN.'?act=danh-muc');
                 exit();
 
@@ -65,7 +62,6 @@
             $id = $_POST['id'];
             $ten_danh_muc = $_POST['ten_danh_muc'];
             $mo_ta = $_POST['mo_ta'];
-            $ngay_tao = $_POST['ngay_tao'];
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
@@ -76,7 +72,7 @@
             // Nếu ko có lỗi thì tiến hành sửa danh mục
             if (empty($errors)) {
                 // Nếu ko có lỗi thì tiến hành sửa danh mục
-                $this->modelDanhMuc->updateDanhMuc($id, $ten_danh_muc, $mo_ta, $ngay_tao);
+                $this->modelDanhMuc->updateDanhMuc($id, $ten_danh_muc, $mo_ta);
 
                 header("Location: " . BASE_URL_ADMIN . '?act=danh-muc');
                 exit();

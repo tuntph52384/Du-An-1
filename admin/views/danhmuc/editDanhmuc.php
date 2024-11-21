@@ -46,11 +46,7 @@
                                 <div class="form-group">
                                     <label>Mô tả</label>
                                     <textarea name="mo_ta" id="" class="form-control" placeholder="Nhập mô tả"><?= $danhMuc['mo_ta'] ?></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ngay_tao">Ngày tạo</label>
-                                    <input type="text" class="form-control" name="ngay_tao" id="ngay_tao" value="<?=$danhMuc['ngay_tao'] ?>" readonly>
-                                </div>
+                                    </div>
 
                             </div>
 

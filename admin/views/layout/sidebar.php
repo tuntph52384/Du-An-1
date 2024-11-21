@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" >
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="../../index3.html" class="brand-link text-center">
     <img src="" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -9,7 +9,7 @@
   <div class="sidebar">
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
- 
+
 
       <div class="info">
         <a href="#" class="d-block"><strong>Nước Hoa Dior</strong></a>
@@ -32,28 +32,28 @@
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN .'?act=danh-muc' ?>" class="nav-link">
-            <i class="nav-icon fas fa-th" ></i>
-            <p >
-             Quản lý danh mục sản phẩm
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
-          <i class="bi bi-luggage-fill"></i>
+          <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
             <p>
-             Quản lý sản phẩm
+              Quản lý danh mục sản phẩm
             </p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
+          <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Quản lý sản phẩm
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=don-hang'  ?>" class="nav-link">
             <i class="nav-icon fas fa-file-invoice-dollar"></i>
             <p>
-             Quản lý đơn hàng
+              Quản lý đơn hàng
             </p>
           </a>
         </li>

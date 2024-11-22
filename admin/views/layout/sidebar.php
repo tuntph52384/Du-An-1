@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black;">
   <!-- Brand Logo -->
   <a href="../../index3.html" class="brand-link text-center">
     <img src="" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -12,7 +12,7 @@
 
 
       <div class="info">
-        <a href="#" class="d-block"><strong>Nước Hoa Dior</strong></a>
+        <a href="#" class="align-middle" style="color: white"><strong>Shop Nước Hoa</strong></a>
       </div>
     </div>
 
@@ -24,8 +24,8 @@
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
+            <i class="nav-icon fas fa-tachometer-alt"style="color: white"></i>
+            <p style="color: white">
               Trang chủ
             </p>
           </a>
@@ -33,8 +33,8 @@
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
+            <i class="nav-icon fas fa-th" style="color: white"></i>
+            <p style="color: white">
               Quản lý danh mục sản phẩm
             </p>
           </a>
@@ -42,8 +42,8 @@
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>
+            <i class="nav-icon fas fa-th" style="color: white"></i>
+            <p style="color: white">
               Quản lý sản phẩm
             </p>
           </a>
@@ -51,20 +51,43 @@
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=don-hang'  ?>" class="nav-link">
-            <i class="nav-icon fas fa-file-invoice-dollar"></i>
-            <p>
+            <i class="nav-icon fas fa-file-invoice-dollar" style="color: white"></i>
+            <p style="color: white">
               Quản lý đơn hàng
             </p>
           </a>
         </li>
 
+      
         <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user" style="color: white"></i>
+            <p style="color: white">
               Quản lý tài khoản
             </p>
+            <i class="fas fa-angle-left right" style="color: white"></i>
           </a>
+
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri' ?>" class="nav-link">
+                <i class="nav-icon far fa-user" style="color: white"></i>
+                <p style="color: white">
+                  Tài khoản quản trị
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN . '?act=list-tai-khoan-khach-hang' ?>" class="nav-link">
+                <i class="nav-icon far fa-user" style="color: white"></i>
+                <p style="color: white">
+                  Tài khoản khách hàng
+                </p>
+              </a>
+            </li>
+
+          </ul>
         </li>
       </ul>
     </nav>

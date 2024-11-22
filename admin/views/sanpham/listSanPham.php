@@ -54,7 +54,7 @@
                       <td><?= $key + 1 ?></td>
                       <td><?= $sanPham['ten_san_pham'] ?></td>
                       <td>
-                        <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 100px" alt="" onerror="this.onerror=null; this.src='https://cdn.tgdd.vn/Files/2021/04/18/1344308/tim-hieu-giong-cho-alaska-nguon-goc-dac-diem-cach-nuoi-bang-gia-202203281548533637.jpg'" ;>
+                        <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 100px" alt="" onerror="this.onerror=null; this.src='https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg'" ;>
                       </td>
                       <td><?= $sanPham['gia_san_pham'] ?></td>
                       <td><?= $sanPham['so_luong'] ?></td>

@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-dark" >
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: black;">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -18,7 +18,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="<?= BASE_URL_ADMIN ?>" onclick="return confirm('Đăng xuất tài khoản')">
+      <a class="nav-link" href="<?= BASE_URL_ADMIN. '?act=logout-admin' ?>" onclick="return confirm('Đăng xuất tài khoản')">
         <i class="fas fa-sign-out-alt" style="color: white;"></i>
       </a>
     </li>

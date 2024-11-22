@@ -1,8 +1,8 @@
-<footer class="main-footer">
+<footer class="main-footer" style="background-color: black;">
     <div class="float-right d-none d-sm-block">
       By <b>Nhom 3</b>
     </div>
-    <strong>Nước Hoa Dior</strong>
+    <strong>Nước Hoa </strong>
   </footer>
 
   <!-- Control Sidebar -->

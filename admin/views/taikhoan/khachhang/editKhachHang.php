@@ -1,12 +1,9 @@
-<!-- Header -->
-<?= include './views/layout/header.php' ?>
 
-<!-- Navbar -->
-<?= include './views/layout/navbar.php' ?>
-<!-- /.navbar -->
 
-<!-- Main Sidebar Container -->
-<?= include './views/layout/sidebar.php' ?>
+<?php require_once './views/layout/header.php' ?>
+<?php require_once './views/layout/navbar.php' ?>
+<?php require_once './views/layout/sidebar.php' ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -107,15 +104,9 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<!-- Footer -->
-<?= include './views/layout/footer.php' ?>
-<!-- End footer -->
-<!-- Page specific script -->
-<!-- Code injected by live-server -->
-
+<?php require_once './views/layout/footer.php' ?>
 </body>
 
 </html>

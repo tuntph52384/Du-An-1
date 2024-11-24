@@ -119,11 +119,20 @@
             </div>
             <div class="card-body">
                 <?php if (isset($_SESSION['error'])) { ?>
-                    <p class="text-danger"><?= $_SESSION['error'] ?></p>
+                    <?php if (is_array($_SESSION['error'])): ?>
+                        <ul class="text-danger">
+                            <?php foreach ($_SESSION['error'] as $error): ?>
+                                <li><?= htmlspecialchars($error) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p class="text-danger"><?= htmlspecialchars($_SESSION['error']) ?></p>
+                    <?php endif; ?>
                 <?php } else { ?>
                     <p class="login-box-msg">Vui lòng đăng nhập</p>
                 <?php } ?>
-                
+
+
                 <form action="<?= BASE_URL_ADMIN . '?act=check-login-admin' ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" name="email">

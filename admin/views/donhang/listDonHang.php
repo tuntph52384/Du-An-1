@@ -52,21 +52,24 @@
                       <td><?= $donHang['ma_don_hang'] ?></td>
                       <td><?= $donHang['ten_nguoi_nhan'] ?></td>
                       <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
-                      <td><?= $donHang['ngay_dat'] ?></td>
-                      <td><?= $donHang['tong_tien'] ?></td>
+                      <td><?= formatDate($donHang['ngay_dat']) ?></td> <!-- Bạn có thể định dạng lại ngày ở đây -->
+                      <td><?= number_format($donHang['tong_tien'], 0, ',', '.') ?> VND</td> <!-- Định dạng lại tiền -->
                       <td><?= $donHang['ten_trang_thai'] ?></td>
                       <td>
                         <div class="btn-group">
-                          <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                            <button class="btn btn-primary"><i class="far fa-eye"></i></button>
+                          <!-- Button Xem -->
+                          <a href="<?= BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id_don_hang=' . $donHang['id'] ?>" class="btn btn-primary btn-sm" role="button">
+                             Xem 
                           </a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>">
-                            <button class="btn btn-warning"><i class="fas fa-cog"></i></button>
+                          <!-- Button Sửa -->
+                          <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id_don_hang=' . $donHang['id'] ?>" class="btn btn-warning btn-sm" role="button">
+                            Sửa 
                           </a>
                         </div>
                       </td>
                     </tr>
                   <?php endforeach ?>
+
                 </tbody>
                 <tfoot>
                   <tr>

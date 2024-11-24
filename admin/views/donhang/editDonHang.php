@@ -1,12 +1,10 @@
-<!-- Header -->
-<?= include './views/layout/header.php' ?>
 
-<!-- Navbar -->
-<?= include './views/layout/navbar.php' ?>
-<!-- /.navbar -->
 
-<!-- Main Sidebar Container -->
-<?= include './views/layout/sidebar.php' ?>
+
+<?php require_once './views/layout/header.php' ?>
+<?php require_once './views/layout/navbar.php' ?>
+<?php require_once './views/layout/sidebar.php' ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -14,7 +12,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-11">
                     <h1>Quản lý thông tin đơn hàng</h1>
                 </div>
                 <div class="col-1">
@@ -115,15 +113,9 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<!-- Footer -->
-<?= include './views/layout/footer.php' ?>
-<!-- End footer -->
-<!-- Page specific script -->
-<!-- Code injected by live-server -->
-
+<?php require_once './views/layout/footer.php' ?>
 </body>
 
 </html>

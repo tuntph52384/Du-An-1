@@ -24,8 +24,8 @@
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"style="color: white"></i>
-            <p style="color: white">
+            <i class="nav-icon fas fa-tachometer-alt" style="color: white"></i>
+            <p style="color: white" >
               Trang chủ
             </p>
           </a>
@@ -35,14 +35,15 @@
           <a href="<?= BASE_URL_ADMIN . '?act=danh-muc' ?>" class="nav-link">
             <i class="nav-icon fas fa-th" style="color: white"></i>
             <p style="color: white">
-              Quản lý danh mục sản phẩm
+              Danh mục sản phẩm
             </p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="nav-link">
-            <i class="nav-icon fas fa-th" style="color: white"></i>
+          <i class="nav-icon fas fa-book-open" style="color: white"></i>
+
             <p style="color: white">
               Quản lý sản phẩm
             </p>
@@ -57,8 +58,18 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="<?= BASE_URL_ADMIN . '?act=list-binh-luans'  ?>" class="nav-link">
+       
+          <i class="nav-icon fas fa-book" style="color: white"></i>
 
-      
+            <p style="color: white">
+              Quản lý bình luận
+            </p>
+          </a>
+        </li>
+
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user" style="color: white"></i>

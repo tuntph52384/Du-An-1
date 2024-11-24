@@ -29,18 +29,12 @@ class AdminTaiKhoanController
 
     public function postAddQuanTri()
     {
-        // Hàm này dùng để xử lý thêm dữ liệu
-
-        // Kiểm tra xem dữ liệu có phải đc submit lên ko
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Lấy ra dữ liệu
             $ho_ten = $_POST['ho_ten'] ?? '';
-
             $email = $_POST['email'] ?? '';
-
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
 
-            // Tạo mảng trống để chứa dữ liệu
             $errors = [];
             if (empty($ho_ten)) {
                 $errors['ho_ten'] = 'Họ tên không được bỏ trống';
@@ -49,33 +43,32 @@ class AdminTaiKhoanController
                 $errors['email'] = 'Email không được bỏ trống';
             }
             if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = 'Số diện thoại không được bỏ trống';
+                $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
+            }
+            if (empty($mat_khau)) {
+                $errors['mat_khau'] = 'Mật khẩu không được bỏ trống';
+            } elseif (strlen($mat_khau) < 6) {
+                $errors['mat_khau'] = 'Mật khẩu phải có ít nhất 6 ký tự';
             }
 
             $_SESSION['error'] = $errors;
 
-            // Nếu ko có lỗi thì tiến hành thêm tài khoản
             if (empty($errors)) {
-                // Nếu ko có lỗi thì tiến hành thêm tài khoản
-                // Đặt password mặc định - 123@123ab
-                $password = password_hash('123@123ab', PASSWORD_BCRYPT);
-
-                // Khai báo chức vụ
+                $hashedPassword = password_hash($mat_khau, PASSWORD_BCRYPT);
                 $chuc_vu_id = 1;
 
-                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id ,$so_dien_thoai);
+                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $hashedPassword, $chuc_vu_id, $so_dien_thoai);
 
                 header("Location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
                 exit();
             } else {
-                // Trả về form và lỗi
                 $_SESSION['flash'] = true;
-
                 header("Location: " . BASE_URL_ADMIN . '?act=form-them-quan-tri');
                 exit();
             }
         }
     }
+
 
     public function formEditQuanTri()
     {
@@ -88,60 +81,57 @@ class AdminTaiKhoanController
         deleteSessionError();
     }
 
-    public function  postEditQuanTri()
+    public function postEditQuanTri()
     {
-        // kiểm tra xem dữ liệu có được submit lên không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // lấy ra dữ liệu
-            // Lấy ra dữ liệu cũ của sản phẩm
-            $quan_tri_id = $_POST['quan_tri_id'] ?? '';
-
+            $id = $_POST['quan_tri_id'] ?? '';
             $ho_ten = $_POST['ho_ten'] ?? '';
             $email = $_POST['email'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
-
-            // tạo 1 mảng trống để chứa dữ liệu
+    
             $errors = [];
-
             if (empty($ho_ten)) {
-                $errors['ho_ten'] = 'Tên người dùng không được để trống';
+                $errors['ho_ten'] = 'Họ tên không được bỏ trống';
             }
             if (empty($email)) {
-                $errors['email'] = 'Tên email người dùng không được để trống';
+                $errors['email'] = 'Email không được bỏ trống';
             }
             if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = ' số diện thoại người dùng không được để trống';
+                $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
             }
-            if (empty($trang_thai)) {
-                $errors['trang_thai'] = 'Vui lòng chọ trạng thái';
+    
+            if (empty($mat_khau)) {
+                $mat_khau = $this->modelTaiKhoan->getDetailTaiKhoan($id)['mat_khau'];  // Giữ mật khẩu cũ nếu không thay đổi
+            } elseif (strlen($mat_khau) < 6) {
+                $errors['mat_khau'] = 'Mật khẩu phải có ít nhất 6 ký tự';
+            } else {
+                $mat_khau = password_hash($mat_khau, PASSWORD_BCRYPT);  // Mã hóa mật khẩu mới
             }
-
-
+    
             $_SESSION['error'] = $errors;
-
-            // nếu không có lỗi tiến hành sửa
+    
             if (empty($errors)) {
-                // nếu không có lỗi tiến hành thêm sản phẩm
-                $this->modelTaiKhoan->updateTaiKhoan(
-                    $quan_tri_id,
-                    $ho_ten,
-                     $email,
-                    $so_dien_thoai,
-                    $trang_thai
-                );
-
-                header("Location:" . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
+                // Cập nhật tài khoản
+                $this->modelTaiKhoan->updateTaiKhoan($id, $ho_ten, $email, $so_dien_thoai, $trang_thai, $mat_khau);
+    
+                // Lưu thông báo thành công
+                $_SESSION['flash'] = 'Cập nhật tài khoản thành công!';
+    
+                // Điều hướng về trang danh sách tài khoản
+                header("Location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
                 exit();
             } else {
-                // trả về form và lỗi
-                // Đặt chỉ thị xóa session sau khi hiển thị form
-                $_SESSION['flash'] = true;
-                header("Location:" . BASE_URL_ADMIN . '?act=form-sua-quan-tri&id_quan_tri=' . $quan_tri_id);
+                // Trả về lỗi và giữ thông tin nhập vào
+                $_SESSION['flash'] = null;
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-quan-tri&id=' . $id);
                 exit();
             }
         }
     }
+    
+
 
     public function resetPassword()
     {

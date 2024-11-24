@@ -10,12 +10,15 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminTaiKhoanController.php';
+require_once './controllers/AdminBinhLuanController.php';
 
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminBinhLuan.php';
+
 
 
 // Route
@@ -93,8 +96,11 @@ match ($act) {
 
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
 
-     // route bình luận
-     'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+    // route bình luận
+    // Quản lý bình luận
+    'list-binh-luans' => (new AdminBinhLuanController())->danhSachBinhLuans(),
+    'update-trang-thai-binh-luan' => (new AdminBinhLuanController())->updateTrangThaiBinhLuan(),
+
 
     // route auth
     'login-admin' => (new AdminTaiKhoanController())->formLogin(),

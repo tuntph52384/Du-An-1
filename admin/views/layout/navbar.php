@@ -6,7 +6,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: white;"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="<?= BASE_URL ?>" class="nav-link" style="color: white;"><strong>Website</strong></a>
+      <a href="" class="nav-link" style="color: white;"><strong>Website</strong></a>
     </li>
   </ul>
 

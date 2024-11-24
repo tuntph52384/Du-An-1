@@ -1,12 +1,8 @@
-<!-- Header -->
-<?= include './views/layout/header.php' ?>
 
-<!-- Navbar -->
-<?= include './views/layout/navbar.php' ?>
-<!-- /.navbar -->
+<?php require_once './views/layout/header.php' ?>
+<?php require_once './views/layout/navbar.php' ?>
+<?php require_once './views/layout/sidebar.php' ?>
 
-<!-- Main Sidebar Container -->
-<?= include './views/layout/sidebar.php' ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -97,34 +93,9 @@
         </div>
         <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<!-- Footer -->
-<?= include './views/layout/footer.php' ?>
-<!-- End footer -->
-<!-- Page specific script -->
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
-<!-- Code injected by live-server -->
-
+<?php require_once './views/layout/footer.php' ?>
 </body>
 
 </html>

@@ -34,9 +34,9 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <div class="col-12">
-              <img style="width:400px; height:400px" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-image" alt="Product Image">
+              <img style="width:300px; height:300px" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-image" alt="Product Image">
             </div>
-            <div class="col-12 product-image-thumbs">
+            <div class="col-10 product-image-thumbs">
               <!-- <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div> -->
               <?php foreach ($listAnhSanPham as $key => $anhSP) { ?>
                 <div class="product-image-thumb <?= $anhSP[$key] == 0 ? 'active' : '' ?>"><img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" alt="Product Image"></div>

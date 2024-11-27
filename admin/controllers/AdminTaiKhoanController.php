@@ -141,7 +141,7 @@ class AdminTaiKhoanController
         $password = password_hash('123@123ab', PASSWORD_BCRYPT);
 
         $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
-
+        
         if ($status && $tai_khoan['chuc_vu_id'] == 1) {
             header("Location:" . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
             exit();

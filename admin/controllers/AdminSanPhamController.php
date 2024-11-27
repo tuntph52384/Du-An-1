@@ -27,8 +27,7 @@ class AdminSanPhamController
     public function  postAddSanPham()
     {
         // hàm này dùng để xử lý thêm dữ liệu 
-        // var_dump('abc');
-        // die();
+ 
         // kiểm tra xem dữ liệu có được submit lên không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy ra dữ liệu

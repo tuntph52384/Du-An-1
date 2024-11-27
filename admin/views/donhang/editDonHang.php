@@ -38,7 +38,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên người nhận</label>
-                                    <input type="text" class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" disabled>
                                     <?php if (isset($errors['ten_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['ten_nguoi_nhan'] ?></p>
                                     <?php } ?>

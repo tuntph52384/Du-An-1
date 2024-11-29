@@ -70,17 +70,7 @@
                                         </tr>
                                     <?php } ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Họ tên</th>
-                                        <th>Ảnh đại diện</th>
-                                        <th>Email</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </tfoot>
+                             
                             </table>
                         </div>
                         <!-- /.card-body -->

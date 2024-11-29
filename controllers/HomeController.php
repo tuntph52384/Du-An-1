@@ -4,11 +4,13 @@ class HomeController
 {
     public $modelSanPham;
     public $modelTaiKhoan;
+    public $modelGioHang;
 
     public function __construct()
     {
         $this->modelSanPham = new SanPham();
-        // $this->modelTaiKhoan = new TaiKhoan();   
+        $this->modelTaiKhoan = new TaiKhoan(); 
+        $this->modelGioHang = new GioHang();  
     }
     public function home()
     {
@@ -39,6 +41,110 @@ class HomeController
         } else {
             header("Location:" . BASE_URL);
             exit();
+        }
+    }
+
+
+    public function formLogin()
+    {
+        require_once './views/auth/formLogin.php';
+
+        deleteSessionError();
+    }
+    public function postLogin()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Lấy email và pass gửi lên từ form
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // Xử lý kiểm tra thông tin đăng nhập
+
+            $user = $this->modelTaiKhoan->checkLogin($email, $password);
+
+            if ($user == $email) { // trường hợp đăng nhập thành công
+                // Lưu thông tin vào session
+                $_SESSION['user_client'] = $user;
+
+                header("Location: " . BASE_URL);
+                exit();
+            } else {
+                // Lỗi thì lưu vào session
+                $_SESSION['error'] = $user;
+
+                $_SESSION['flash'] = true;
+
+                header("Location: " . BASE_URL. '?act=login');
+            
+            }
+        }
+    }
+
+
+    public function addGioHang(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_SESSION['user_client'])){
+                $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+                $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+                if(!$gioHang){
+                    $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
+                    $gioHang = ['id' => $gioHangId];
+                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);  
+                }else{
+                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);  
+                }
+
+                $sanPhamId = $_POST['san_pham_id'];
+                $soLuong = $_POST['so_luong'];
+                $checkSanPham = false;
+                foreach($chiTietGioHang as $detail){
+                    if($detail['san_pham_id'] == $sanPhamId){
+                        $newSoLuong = $detail['so_luong'] + $soLuong;
+                        $this->modelGioHang->updateSoLuong($gioHang['id'], $sanPhamId, $newSoLuong);
+                        $checkSanPham = true;
+                        break;
+                    }
+                }
+
+                if(!$checkSanPham){
+                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $sanPhamId, $soLuong);
+                }
+                header("Location: " . BASE_URL. '?act=gio-hang');
+                exit();
+
+
+                
+            }
+            else{
+                var_dump('Chưa đăng nhập');die();
+            }
+          
+
+            
+        }
+
+
+          
+    }
+
+    public function gioHang()
+    {
+        if (isset($_SESSION['user_client'])) {
+            $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+            if (!$gioHang) {
+                $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
+                $gioHang = ['id' => $gioHangId];
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+            } else {
+                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+            }
+    
+
+            require_once './views/gioHang.php';
+        } 
+        else {    
+            var_dump('Chưa đăng nhập'); die();
         }
     }
 }

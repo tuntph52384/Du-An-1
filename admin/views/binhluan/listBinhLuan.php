@@ -88,17 +88,7 @@
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Sản phẩm</th>
-                                        <th>ID Tài khoản</th>
-                                        <th>Nội dung</th>
-                                        <th>Ngày đăng</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </tfoot>
+                               
                             </table>
                         </div>
                     </div>

@@ -75,18 +75,7 @@
                     </tr>
                   <?php endforeach ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>STT</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Ảnh sản phẩm</th>
-                    <th>Giá tiền</th>
-                    <th>Số lượng</th>
-                    <th>Danh mục</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
-                  </tr>
-                </tfoot>
+               
               </table>
             </div>
             <!-- /.card-body -->

@@ -1,6 +1,3 @@
-
-
-
 <?php require_once './views/layout/header.php' ?>
 <?php require_once './views/layout/navbar.php' ?>
 <?php require_once './views/layout/sidebar.php' ?>
@@ -38,7 +35,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên người nhận</label>
-                                    <input type="text" class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" disabled>
+                                    <input type="text" class="form-control" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" readonly>
                                     <?php if (isset($errors['ten_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['ten_nguoi_nhan'] ?></p>
                                     <?php } ?>
@@ -46,7 +43,7 @@
 
                                 <div class="form-group">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" class="form-control" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" readonly>
                                     <?php if (isset($errors['sdt_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['sdt_nguoi_nhan'] ?></p>
                                     <?php } ?>
@@ -54,7 +51,7 @@
 
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="email" class="form-control" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" readonly>
                                     <?php if (isset($errors['email_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['email_nguoi_nhan'] ?></p>
                                     <?php } ?>
@@ -62,7 +59,7 @@
 
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
-                                    <input type="text" class="form-control" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục">
+                                    <input type="text" class="form-control" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>" placeholder="Nhập tên danh mục" readonly>
                                     <?php if (isset($errors['dia_chi_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['dia_chi_nguoi_nhan'] ?></p>
                                     <?php } ?>
@@ -70,7 +67,7 @@
 
                                 <div class="form-group">
                                     <label>Ghi chú</label>
-                                    <textarea name="ghi_chu" id="" class="form-control" placeholder="Nhập mô tả"><?= $donHang['ghi_chu'] ?></textarea>
+                                    <textarea name="ghi_chu" id="" class="form-control" placeholder="Nhập mô tả" readonly><?= $donHang['ghi_chu'] ?></textarea>
                                 </div>
 
                                 <hr>
@@ -80,13 +77,11 @@
                                     <select id="trang_thai_id" name="trang_thai_id" class="form-control custom-select">
                                         <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
                                             <option <?php
+                                                    // Kiểm tra nếu trạng thái đơn hàng đã được chọn là các trạng thái không cho phép thay đổi
                                                     if (
-                                                        $donHang['trang_thai_id'] > $trangThai['id']
-                                                        || $donHang['trang_thai_id'] == 9
-                                                        || $donHang['trang_thai_id'] == 10
-                                                        || $donHang['trang_thai_id'] == 11
+                                                        $donHang['trang_thai_id'] >= $trangThai['id'] // Chặn thay đổi nếu trạng thái đã tiến triển
                                                     ) {
-                                                        echo 'readonly';
+                                                        echo 'disabled';
                                                     }
                                                     ?> <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> value="<?= $trangThai['id']; ?>">
                                                 <?= $trangThai['ten_trang_thai']; ?>
@@ -98,10 +93,10 @@
                                     <?php } ?>
                                 </div>
 
-                            </div>
 
+                            </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
                             </div>
                         </form>
                     </div>

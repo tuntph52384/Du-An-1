@@ -79,14 +79,8 @@
                         </div>
                         <!-- Cart Update Option -->
                         <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="apply-coupon-wrapper">
-                                <form action="#" method="post" class=" d-block d-md-flex">
-                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                    <button class="btn btn-sqr">Apply Coupon</button>
-                                </form>
-                            </div>
                             <div class="cart-update">
-                                <a href="#" class="btn btn-sqr">Update Cart</a>
+                                <a href="#" class="btn btn-sqr">Cập nhật giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -106,7 +100,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="btn btn-sqr d-block">Đặt hàng</a>
+                            <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn btn-sqr d-block">Đặt hàng</a>
                         </div>
                     </div>
                 </div>

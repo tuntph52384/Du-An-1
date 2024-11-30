@@ -77,12 +77,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Cart Update Option -->
-                        <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="cart-update">
-                                <a href="#" class="btn btn-sqr">Cập nhật giỏ hàng</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -110,5 +105,5 @@
     <!-- cart main wrapper end -->
 </main>
 
-<?php require_once 'layout/miniCart.php'; ?>
+
 <?php require_once 'layout/footer.php'; ?>

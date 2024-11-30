@@ -5,8 +5,8 @@
 <!-- Scroll to Top End -->
 
 <!-- footer area start -->
-<footer class="footer-widget-area">
-    <div class="footer-top section-padding">
+<footer class="footer-widget-area" >
+    <div class="footer-top section-padding" style="background-color: gray;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -65,17 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="copyright-text text-center">
-                        <p>&copy; 2024 <b>Nuoc Hoa NT</b> Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/"><b>HasThemes</b></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </footer>
 <!-- footer area end -->
 <!-- JS

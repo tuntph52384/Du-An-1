@@ -113,21 +113,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-payment-method">
-                                        <div class="payment-method-name">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="directbank"  name="phuong_thuc_thanh_toan_id" value="2" class="custom-control-input" />
-                                                <label class="custom-control-label" for="directbank">Thanh toán VNPAY </label>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    
                                     <div class="summary-footer-area">
                                         <div class="custom-control custom-checkbox mb-20">
                                             <input type="checkbox" class="custom-control-input" id="terms" required />
                                             <label class="custom-control-label" for="terms">Xác nhận đặt hàng</a></label>
                                         </div>
-                                        <button type="submit" class="btn btn-sqr">Place Order</button>
+                                        <button type="submit" class="btn btn-sqr">Thanh toán</button>
                                     </div>
                                 </div>
                             </div>
@@ -140,5 +132,5 @@
     <!-- checkout main wrapper end -->
 </main>
 
-<?php require_once 'layout/miniCart.php'; ?>
+
 <?php require_once 'layout/footer.php'; ?>

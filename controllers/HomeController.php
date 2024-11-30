@@ -199,9 +199,94 @@ class HomeController
                 // header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
                 exit();
             }else{
-                var_dump('Loi khi thanh toan');
+                var_dump('Lỗi khi thanh toan');
                 die;
             }
         }
     }
+
+    public function lichSuMuaHang(){
+        if (isset($_SESSION['user_client'])) {
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $tai_khoan_id = $user['id'];
+
+            $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
+            $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
+   
+
+            $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();
+            $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
+
+            $donHangs = $this->modelDonHang->getDonHangFromUser($tai_khoan_id);
+
+            require_once './views/lichSuMuaHang.php';
+            // var_dump($donHangs);
+
+    }else{
+        var_dump('Ban chua dang nhap');
+        die;
+    }
+    }
+
+    public function chiTietMuaHang(){
+        if (isset($_SESSION['user_client'])) {
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $tai_khoan_id = $user['id'];
+
+            $donHangId = $_GET['id'];
+
+            $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
+            $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
+   
+
+            $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();            
+            $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
+
+            $donHang = $this->modelDonHang->getDonHangById($donHangId);
+
+            $chiTietDonHang = $this->modelDonHang->getChiTietDonHangByDonHangId($donHangId);
+
+            if($donHang['tai_khoan_id'] != $tai_khoan_id){
+                echo "Ban khong co quyen xem chi tiet don hang nay";
+                exit;
+            }
+
+            require_once './views/chiTietMuaHang.php';
+
+        }else{
+            var_dump('Ban chua dang nhap');
+            die;
+        }
+    }
+
+    public function huyDonHang(){
+        if(isset($_SESSION['user_client'])){
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            $tai_khoan_id = $user['id'];
+
+            $donHangId = $_GET['id'];
+            $donHang = $this->modelDonHang->getDonHangById($donHangId);
+
+            if($donHang['tai_khoan_id'] != $tai_khoan_id){
+                echo "Ban khong co quyen huy don hang nay";
+                exit;
+
+            }
+            if($donHang['trang_thai_id'] != 1){
+                echo "Chỉ đơn hàng ở trạng thái 'Chưa xác nhận' mới có thể hủy";
+                exit;
+            }
+
+            $this->modelDonHang->updateTrangThaiDonHang($donHangId, 6);
+
+            header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
+            exit();
+        }else{
+            var_dump('Ban chua dang nhap');
+            die;
+        }
+    }
 }
+
+
+

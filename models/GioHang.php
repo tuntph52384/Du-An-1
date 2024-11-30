@@ -54,6 +54,31 @@ class GioHang
             echo "Lỗi" . $e->getMessage();
         }
     }
+    public function removeProductFromGioHang($gio_hang_id, $san_pham_id)
+{
+    try {
+        // Câu lệnh SQL để xóa sản phẩm khỏi chi tiết giỏ hàng
+        $sql = "DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gio_hang_id AND san_pham_id = :san_pham_id";
+        
+        // Chuẩn bị câu lệnh SQL
+        $stmt = $this->conn->prepare($sql);
+        
+        // Thực thi câu lệnh SQL với tham số truyền vào
+        $stmt->execute([
+            'gio_hang_id' => $gio_hang_id,
+            'san_pham_id' => $san_pham_id
+        ]);
+        
+        // Nếu thực hiện thành công, trả về true
+        return true;
+    } catch (Exception $e) {
+        // Nếu có lỗi, in ra thông báo lỗi
+        echo "Lỗi: " . $e->getMessage();
+        return false;
+    }
+}
+
+
 
     public function addDetailGioHang($gio_hang_id, $san_pham_id, $soluong)
     {
@@ -65,7 +90,12 @@ class GioHang
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
         }
+        
     }
+
+    
+        
+
     public function clearDetailGioHang($gioHangId)
     {
         try {

@@ -85,22 +85,29 @@ class HomeController
     public function addGioHang()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Kiểm tra người dùng đã đăng nhập hay chưa
             if (isset($_SESSION['user_client'])) {
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
                 $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+
+                // Nếu không có giỏ hàng thì tạo mới
                 if (!$gioHang) {
                     $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
                     $gioHang = ['id' => $gioHangId];
                     $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
                 } else {
+                    // Lấy chi tiết giỏ hàng
                     $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
                 }
 
                 $sanPhamId = $_POST['san_pham_id'];
                 $soLuong = $_POST['so_luong'];
+
+                // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
                 $checkSanPham = false;
                 foreach ($chiTietGioHang as $detail) {
                     if ($detail['san_pham_id'] == $sanPhamId) {
+                        // Cập nhật số lượng nếu sản phẩm đã có trong giỏ hàng
                         $newSoLuong = $detail['so_luong'] + $soLuong;
                         $this->modelGioHang->updateSoLuong($gioHang['id'], $sanPhamId, $newSoLuong);
                         $checkSanPham = true;
@@ -108,22 +115,29 @@ class HomeController
                     }
                 }
 
+                // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
                 if (!$checkSanPham) {
                     $this->modelGioHang->addDetailGioHang($gioHang['id'], $sanPhamId, $soLuong);
                 }
+
+                // Chuyển hướng đến giỏ hàng
                 header("Location: " . BASE_URL . '?act=gio-hang');
                 exit();
             } else {
+                // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
                 header("Location: " . BASE_URL . '?act=login');
+                exit();
             }
         }
     }
+
 
     public function gioHang()
     {
         if (isset($_SESSION['user_client'])) {
             $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+
             if (!$gioHang) {
                 $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
                 $gioHang = ['id' => $gioHangId];
@@ -132,30 +146,96 @@ class HomeController
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             }
 
-
+            // Hiển thị giỏ hàng
             require_once './views/gioHang.php';
         } else {
+            // Nếu chưa đăng nhập, chuyển đến trang đăng nhập
             header("Location: " . BASE_URL . '?act=login');
         }
     }
+
+    public function updateGioHang()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_SESSION['user_client'])) {
+                // Lấy thông tin người dùng từ email
+                $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+                // Lấy giỏ hàng của người dùng
+                $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+
+                if ($gioHang) {
+                    // Lặp qua từng sản phẩm trong giỏ và cập nhật số lượng
+                    foreach ($_POST['quantity'] as $sanPhamId => $soLuong) {
+                        $this->modelGioHang->updateSoLuong($gioHang['id'], $sanPhamId, $soLuong);
+                    }
+
+                    // Sau khi cập nhật, chuyển hướng đến trang giỏ hàng
+                    header("Location: " . BASE_URL . '?act=gio-hang');
+                    exit();
+                }
+            } else {
+                // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+                header("Location: " . BASE_URL . '?act=login');
+                exit();
+            }
+        }
+    }
+
+
+
+
+    public function removeFromGioHang($sanPhamId)
+    {
+        if (isset($_SESSION['user_client'])) {
+            // Lấy thông tin người dùng từ email
+            $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+            // Lấy giỏ hàng của người dùng
+            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
+
+            if ($gioHang) {
+                // Xóa sản phẩm khỏi giỏ hàng
+                $this->modelGioHang->removeProductFromGioHang($gioHang['id'], $sanPhamId);
+
+                // Sau khi xóa, chuyển hướng đến trang giỏ hàng
+                header("Location: " . BASE_URL . '?act=gio-hang');
+                exit();
+            }
+        } else {
+            // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            header("Location: " . BASE_URL . '?act=login');
+            exit();
+        }
+    }
+
+
+
+
+
     public function thanhToan()
     {
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $gioHang = $this->modelGioHang->getGioHangFromUser($user['id']);
-            if (!$gioHang) {
-                $gioHangId = $this->modelGioHang->addGioHang($user['id']);
-                $gioHang = ['id' => $gioHangId];
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-            } else {
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
+            $chiTietGioHang = $gioHang ? $this->modelGioHang->getDetailGioHang($gioHang['id']) : [];
+
+            // Kiểm tra nếu giỏ hàng trống
+            if (empty($chiTietGioHang)) {
+                $_SESSION['error'] = "Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm để đặt hàng.";
+                header("Location: " . BASE_URL . '?act=gio-hang');
+                exit(); // Ngăn chặn truy cập tiếp theo
             }
 
+            // Nếu giỏ hàng không trống, hiển thị trang thanh toán
             require_once './views/thanhToan.php';
         } else {
+            // Nếu chưa đăng nhập, chuyển đến trang đăng nhập
             header("Location: " . BASE_URL . '?act=login');
+            exit();
         }
     }
+
+
+
 
 
     public function postThanhToan()
@@ -175,10 +255,22 @@ class HomeController
             $tai_khoan_id = $user['id'];
             $ma_don_hang = "NH" . rand(10000, 99999);
 
-            $donHang = $this->modelDonHang->addDonHang($ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dia_chi_nguoi_nhan, $ghi_chu, $tong_tien, $phuong_thuc_thanh_toan_id, $ngay_dat, $trang_thai_id, $tai_khoan_id, $ma_don_hang);
-
+            $donHang = $this->modelDonHang->addDonHang(
+                $ten_nguoi_nhan,
+                $email_nguoi_nhan,
+                $sdt_nguoi_nhan,
+                $dia_chi_nguoi_nhan,
+                $ghi_chu,
+                $tong_tien,
+                $phuong_thuc_thanh_toan_id,
+                $ngay_dat,
+                $trang_thai_id,
+                $tai_khoan_id,
+                $ma_don_hang
+            );
 
             $gioHang = $this->modelGioHang->getGioHangFromUser($tai_khoan_id);
+
             if ($donHang) {
                 $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
                 foreach ($chiTietGioHang as $item) {
@@ -191,28 +283,34 @@ class HomeController
                         $donGia * $item['so_luong']
                     );
                 }
-                $this->modelGioHang->clearDetailGioHang($gioHang['id']);
 
+                $this->modelGioHang->clearDetailGioHang($gioHang['id']);
                 $this->modelGioHang->clearGioHang($tai_khoan_id);
 
+                // Lưu thông báo thanh toán thành công vào session
+                $_SESSION['success'] = "Thanh toán thành công! Mã đơn hàng của bạn là $ma_don_hang.";
 
-                // header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
+                header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
                 exit();
-            }else{
-                var_dump('Lỗi khi thanh toan');
-                die;
+            } else {
+                echo "Lỗi khi thanh toán. Vui lòng thử lại!";
+                exit();
             }
         }
     }
 
-    public function lichSuMuaHang(){
+
+
+
+    public function lichSuMuaHang()
+    {
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
 
             $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
             $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
-   
+
 
             $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();
             $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
@@ -222,13 +320,14 @@ class HomeController
             require_once './views/lichSuMuaHang.php';
             // var_dump($donHangs);
 
-    }else{
-        var_dump('Ban chua dang nhap');
-        die;
-    }
+        } else {
+            var_dump('Ban chua dang nhap');
+            die;
+        }
     }
 
-    public function chiTietMuaHang(){
+    public function chiTietMuaHang()
+    {
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
@@ -237,42 +336,41 @@ class HomeController
 
             $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
             $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
-   
 
-            $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();            
+
+            $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();
             $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
 
             $donHang = $this->modelDonHang->getDonHangById($donHangId);
 
             $chiTietDonHang = $this->modelDonHang->getChiTietDonHangByDonHangId($donHangId);
 
-            if($donHang['tai_khoan_id'] != $tai_khoan_id){
+            if ($donHang['tai_khoan_id'] != $tai_khoan_id) {
                 echo "Ban khong co quyen xem chi tiet don hang nay";
                 exit;
             }
 
             require_once './views/chiTietMuaHang.php';
-
-        }else{
+        } else {
             var_dump('Ban chua dang nhap');
             die;
         }
     }
 
-    public function huyDonHang(){
-        if(isset($_SESSION['user_client'])){
+    public function huyDonHang()
+    {
+        if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
 
             $donHangId = $_GET['id'];
             $donHang = $this->modelDonHang->getDonHangById($donHangId);
 
-            if($donHang['tai_khoan_id'] != $tai_khoan_id){
+            if ($donHang['tai_khoan_id'] != $tai_khoan_id) {
                 echo "Ban khong co quyen huy don hang nay";
                 exit;
-
             }
-            if($donHang['trang_thai_id'] != 1){
+            if ($donHang['trang_thai_id'] != 1) {
                 echo "Chỉ đơn hàng ở trạng thái 'Chưa xác nhận' mới có thể hủy";
                 exit;
             }
@@ -281,12 +379,9 @@ class HomeController
 
             header("Location: " . BASE_URL . '?act=lich-su-mua-hang');
             exit();
-        }else{
+        } else {
             var_dump('Ban chua dang nhap');
             die;
         }
     }
 }
-
-
-

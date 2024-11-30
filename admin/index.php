@@ -10,14 +10,14 @@ require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminTaiKhoanController.php';
-require_once './controllers/AdminBinhLuanController.php';
+
 
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminDonHang.php';
 require_once './models/AdminTaiKhoan.php';
-require_once './models/AdminBinhLuan.php';
+
 
 
 
@@ -96,10 +96,16 @@ match ($act) {
 
     'chi-tiet-khach-hang' => (new AdminTaiKhoanController())->detailKhachHang(),
 
+    // Quản lý tài khoản cá nhân (quản trị)
+    'form-sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
+
+    'sua-thong-tin-ca-nhan-quan-tri'  => (new AdminTaiKhoanController())->postEditAdmin(),
+
+    'sua-mat-khau-ca-nhan-quan-tri'  => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+
     // route bình luận
-    // Quản lý bình luận
-    'list-binh-luans' => (new AdminBinhLuanController())->danhSachBinhLuans(),
-    'update-trang-thai-binh-luan' => (new AdminBinhLuanController())->updateTrangThaiBinhLuan(),
+
+    'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
 
 
     // route auth

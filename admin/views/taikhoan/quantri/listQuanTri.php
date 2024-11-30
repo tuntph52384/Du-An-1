@@ -17,13 +17,6 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
- <!-- Hiển thị thông báo -->
- <?php if (isset($_SESSION['flash'])): ?>
-        <div class="alert alert-success">
-            <?= $_SESSION['flash']; ?>
-        </div>
-        <?php unset($_SESSION['flash']); ?>
-    <?php endif; ?>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">

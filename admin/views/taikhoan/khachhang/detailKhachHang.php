@@ -110,7 +110,52 @@
                     </div>
                 </div>
 
-                
+                <div class="col-12">
+                    <hr>
+                    <h2>Lịch bình luận</h2>
+                    <div>
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Nội dung</th>
+                                    <th>Ngày bình luận</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($listBinhLuan as $key => $binhLuan) : ?>
+                                    <tr>
+                                        <td><?= $key + 1 ?></td>
+                                        <td>
+                                            <a target="_blank" href="<?= BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id_san_pham=' . $binhLuan['san_pham_id'] ?>">
+                                                <?= $binhLuan['ten_san_pham'] ?>
+                                            </a>
+                                        </td>
+                                        <td><?= $binhLuan['noi_dung'] ?></td>
+                                        <td><?= $binhLuan['ngay_dang'] ?></td>
+                                        <td><?= $binhLuan['trang_thai'] == 1 ? 'Hiển thị' : 'Bị ẩn' ?></td>
+
+                                        <td>
+                                            <div class="btn-group">
+                                                <form action="<?= BASE_URL_ADMIN . '?act=update-trang-thai-binh-luan' ?>" method="post">
+                                                    <input type="hidden" name="id_binh_luan" value="<?= $binhLuan['id'] ?>">
+                                                    <input type="hidden" name="name_view" value="detail_khach">
+                                                    <input type="hidden" name="id_khach_hang" value="<?= $binhLuan['tai_khoan_id'] ?>">
+                                                    <button onclick="return confirm('Bạn có muốn ẩn binhg luận này không?')" class="btn btn-warning">
+                                                        <?= $binhLuan['trang_thai'] == 1 ? 'Ẩn' : 'Bỏ ẩn' ?>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             
                 <!-- /.col -->
             </div>

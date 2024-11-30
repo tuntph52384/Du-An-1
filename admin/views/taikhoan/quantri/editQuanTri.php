@@ -58,14 +58,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Mật khẩu mới (Để trống nếu không thay đổi)</label>
-                                    <input type="password" class="form-control" name="mat_khau" placeholder="Nhập mật khẩu mới">
-                                    <?php if (isset($_SESSION['error']['mat_khau'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['error']['mat_khau'] ?></p>
-                                    <?php } ?>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="trang_thai">Trạng thái tài khoản</label>
                                     <select id="trang_thai" name="trang_thai" class="form-control custom-select">
                                         <option <?= $quanTri['trang_thai'] == 1 ? 'selected' : '' ?> value="1">Active</option>

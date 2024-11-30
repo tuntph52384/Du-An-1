@@ -32,8 +32,6 @@ class AdminTaiKhoanController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ho_ten = $_POST['ho_ten'] ?? '';
             $email = $_POST['email'] ?? '';
-            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-            $mat_khau = $_POST['mat_khau'] ?? '';
 
             $errors = [];
             if (empty($ho_ten)) {
@@ -42,22 +40,16 @@ class AdminTaiKhoanController
             if (empty($email)) {
                 $errors['email'] = 'Email không được bỏ trống';
             }
-            if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
-            }
-            if (empty($mat_khau)) {
-                $errors['mat_khau'] = 'Mật khẩu không được bỏ trống';
-            } elseif (strlen($mat_khau) < 6) {
-                $errors['mat_khau'] = 'Mật khẩu phải có ít nhất 6 ký tự';
-            }
+           
+           
 
             $_SESSION['error'] = $errors;
 
             if (empty($errors)) {
-                $hashedPassword = password_hash($mat_khau, PASSWORD_BCRYPT);
+                $password = password_hash('123@123ab', PASSWORD_BCRYPT);
                 $chuc_vu_id = 1;
 
-                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $hashedPassword, $chuc_vu_id, $so_dien_thoai);
+                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $password, $chuc_vu_id);
 
                 header("Location: " . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
                 exit();
@@ -84,11 +76,10 @@ class AdminTaiKhoanController
     public function postEditQuanTri()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id = $_POST['quan_tri_id'] ?? '';
+            $quan_tri_id = $_POST['quan_tri_id'] ?? '';
             $ho_ten = $_POST['ho_ten'] ?? '';
             $email = $_POST['email'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-            $mat_khau = $_POST['mat_khau'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
     
             $errors = [];
@@ -98,24 +89,16 @@ class AdminTaiKhoanController
             if (empty($email)) {
                 $errors['email'] = 'Email không được bỏ trống';
             }
-            if (empty($so_dien_thoai)) {
-                $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
-            }
     
-            if (empty($mat_khau)) {
-                $mat_khau = $this->modelTaiKhoan->getDetailTaiKhoan($id)['mat_khau'];  // Giữ mật khẩu cũ nếu không thay đổi
-            } elseif (strlen($mat_khau) < 6) {
-                $errors['mat_khau'] = 'Mật khẩu phải có ít nhất 6 ký tự';
-            } else {
-                $mat_khau = password_hash($mat_khau, PASSWORD_BCRYPT);  // Mã hóa mật khẩu mới
+            if (empty($trang_thai)) {
+                $errors['trang_thai'] = 'Vui lòng chọn trạng thái';
             }
     
             $_SESSION['error'] = $errors;
     
             if (empty($errors)) {
                 // Cập nhật tài khoản
-                $this->modelTaiKhoan->updateTaiKhoan($id, $ho_ten, $email, $so_dien_thoai, $trang_thai, $mat_khau);
-    
+                $this->modelTaiKhoan->updateTaiKhoan($quan_tri_id, $ho_ten, $email, $so_dien_thoai, $trang_thai);
                 // Lưu thông báo thành công
                 $_SESSION['flash'] = 'Cập nhật tài khoản thành công!';
     
@@ -124,8 +107,8 @@ class AdminTaiKhoanController
                 exit();
             } else {
                 // Trả về lỗi và giữ thông tin nhập vào
-                $_SESSION['flash'] = null;
-                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-quan-tri&id=' . $id);
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-quan-tri&id_quan_tri=' . $quan_tri_id);
                 exit();
             }
         }
@@ -298,4 +281,131 @@ class AdminTaiKhoanController
 
     // Kết thúc login, logout
 
+
+
+    public function formEditCaNhanQuanTri()
+    {
+        $email = $_SESSION['user_admin'];
+
+        $thongTin = $this->modelTaiKhoan->getTaiKhoanFormEmail($email);
+        // var_dump($thongTin);die;
+
+        require_once './views/taikhoan/canhan/editCaNhan.php';
+
+        deleteSessionError();
+    }
+
+    public function postEditMatKhauCaNhan()
+    {
+        // var_dump($_POST);die;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_pass = $_POST['old_pass'];
+            $new_pass = $_POST['new_pass'];
+            $confirm_pass = $_POST['confirm_pass'];
+
+            // Lấy thông tin user từ session
+            $user = $this->modelTaiKhoan->getTaiKhoanFormEmail($_SESSION['user_admin']);
+
+            $checkPass = (password_verify($old_pass, $user['mat_khau']));
+
+            $errors = [];
+            if (!$checkPass) {
+                $errors['old_pass'] = 'Mật khẩu người dùng không đúng';
+            }
+
+            if ($new_pass !== $confirm_pass) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không đúng';
+            }
+
+            if (empty($old_pass)) {
+                $errors['old_pass'] = 'Vui lòng điền trường dữ liệu này';
+            }
+            if (empty($new_pass)) {
+                $errors['new_pass'] = 'Vui lòng điền trường dữ liệu này';
+            }
+            if (empty($confirm_pass)) {
+                $errors['confirm_pass'] = 'Vui lòng điền trường dữ liệu này';
+            }
+
+            $_SESSION['error'] = $errors;
+
+            if (!$errors) {
+                // Thực hiện đổi mật khẩu
+                $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+
+                $status = $this->modelTaiKhoan->resetPassword($user['id'], $hashPass);
+
+                if ($status) {
+                    $_SESSION['success'] = "Đã đổi mật khẩu thành công.";
+                    
+                    $_SESSION['flash'] = true;
+
+                    header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');
+                }
+            } else {
+                // Lỗi thì lưu vào session
+
+                $_SESSION['flash'] = true;
+
+                header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');
+                exit();
+            }
+        }
+    }
+     // Sửa thong tin admin
+    // Sửa thông tin quản trị viên
+    public function postEditAdmin() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+            $ngay_sinh = $_POST['ngay_sinh'] ?? '';
+            $gioi_tinh = $_POST['gioi_tinh'] ?? '';
+            $dia_chi = $_POST['dia_chi'] ?? '';
+            $trang_thai = $_POST['trang_thai'] ?? '';
+            $errors = [];
+    
+            // Validate dữ liệu
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Họ tên không được để trống';
+            }
+            if (empty($email)) {
+                $errors['email'] = 'Email không được để trống';
+            }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = 'Email không hợp lệ';
+            }
+    
+            $_SESSION['error'] = $errors;
+    
+            if (empty($errors)) {
+                // Lấy thông tin tài khoản từ session
+                $email_admin = $_SESSION['user_admin'];
+                $admin_info = $this->modelTaiKhoan->getTaiKhoanformEmail($email_admin);
+    
+                // Cập nhật thông tin
+                $status = $this->modelTaiKhoan->updateAdmin(
+                    $admin_info['id'],
+                    $ho_ten,
+                    $email,
+                    $so_dien_thoai,
+                    $ngay_sinh,
+                    $gioi_tinh,
+                    $dia_chi,
+                    $trang_thai
+                );
+    
+                if ($status) {
+                    $_SESSION['success'] = 'Cập nhật thông tin thành công';
+                    header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');
+                    exit();
+                } else {
+                    $_SESSION['error']['general'] = 'Cập nhật không thành công. Vui lòng thử lại.';
+                }
+            }
+            // Nếu có lỗi hoặc thất bại, quay lại form
+            header("Location: " . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri');
+            exit();
+        }
+    }
 }

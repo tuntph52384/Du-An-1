@@ -36,7 +36,8 @@ match ($act) {
     'chi-tiet-mua-hang' => (new HomeController())->chiTietMuaHang(),
     'huy-don-hang' => (new HomeController())->huyDonHang(),
 
-    
+    'update-cart' => (new HomeController())->updateGioHang(),
+    'remove-item' => (new HomeController())->removeFromGioHang($_GET['id']),
 
 
 

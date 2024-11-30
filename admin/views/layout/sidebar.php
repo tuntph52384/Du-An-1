@@ -26,7 +26,7 @@
           <a href="<?= BASE_URL_ADMIN ?>" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt" style="color: white"></i>
             <p style="color: white" >
-              Trang chủ
+              Thống kê
             </p>
           </a>
         </li>
@@ -58,18 +58,10 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="<?= BASE_URL_ADMIN . '?act=list-binh-luans'  ?>" class="nav-link">
+
+
+
        
-          <i class="nav-icon fas fa-book" style="color: white"></i>
-
-            <p style="color: white">
-              Quản lý bình luận
-            </p>
-          </a>
-        </li>
-
-
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user" style="color: white"></i>
@@ -98,6 +90,14 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              <a href="<?= BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri' ?>" class="nav-link">
+                <i class="nav-icon far fa-user" style="color: white"></i>
+                <p style="color: white">
+                  Tài khoản cá nhân
+                </p>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

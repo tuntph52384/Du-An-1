@@ -53,6 +53,66 @@ class HomeController
 
         deleteSessionError();
     }
+
+    public function formRegister()
+    {
+        require_once './views/auth/formRegister.php';
+
+        deleteSessionError();
+
+    }
+    public function postRegister()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'] ?? '';
+            $mat_khau = $_POST['mat_khau'] ?? '';
+            $ho_ten = $_POST['ho_ten'] ?? '';
+            $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+    
+            $errors = [];
+    
+            if (empty($email)) {
+                $errors['email'] = 'Email không được bỏ trống';
+            }
+            if (empty($mat_khau)) {
+                $errors['mat_khau'] = 'Mật khẩu không được bỏ trống';
+            }
+            if (empty($ho_ten)) {
+                $errors['ho_ten'] = 'Họ tên không được bỏ trống';
+            }
+            if (empty($so_dien_thoai)) {
+                $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
+            }
+    
+            $_SESSION['error'] = $errors;
+
+    
+            if (empty($errors)) {
+                $mat_khau = password_hash($mat_khau, PASSWORD_BCRYPT);
+                $chuc_vu_id = 2;
+    
+                $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $mat_khau, $so_dien_thoai, $chuc_vu_id);
+    
+                // Lưu thông báo thành công vào session
+                $_SESSION['success'] = "Đăng ký tài khoản thành công!";
+                header("Location: " . BASE_URL . '?act=login');
+                exit();
+            } else {
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL . '?act=form-them-tai-khoan');
+                exit();
+            }
+        }
+    }
+    
+
+
+    public function logout()
+    {
+        unset($_SESSION['user_client']);
+        header("Location: " . BASE_URL);
+        exit(); 
+    }
     public function postLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

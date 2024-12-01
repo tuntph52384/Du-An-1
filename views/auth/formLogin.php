@@ -12,7 +12,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Đăng Nhập</li>
                             </ul>
                         </nav>
@@ -28,16 +28,32 @@
         <div class="container" style="max-width: 40vw">
             <div class="member-area-from-wrap">
                 <div class="row">
+                <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success text-center">
+                            <?= $_SESSION['success']; ?>
+                        </div>
+                        <?php unset($_SESSION['success']); // Xóa thông báo sau khi hiển thị 
+                        ?>
+                    <?php endif; ?>
                     <!-- Login Content Start -->
                     <div class="col-lg-12">
                         <div class="login-reg-form-wrap">
                             <h5 class="text-center">Đăng Nhập</h5>
 
-                            <?php if (isset($_SESSION['error'])) { ?>
-                                <p class="text-danger login-box-msg text-center"><?= $_SESSION['error'] ?></p>
-                            <?php } else { ?>
+                            <?php if (isset($_SESSION['error'])): ?>
+                                <?php if (is_array($_SESSION['error'])): ?>
+                                    <?php foreach ($_SESSION['error'] as $error): ?>
+                                        <p class="text-danger login-box-msg text-center"><?= htmlspecialchars($error) ?></p>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p class="text-danger login-box-msg text-center"><?= htmlspecialchars($_SESSION['error']) ?></p>
+                                <?php endif; ?>
+                                <?php unset($_SESSION['error']); // Xóa session lỗi sau khi hiển thị 
+                                ?>
+                            <?php else: ?>
                                 <p class="login-box-msg text-center">Vui lòng đăng nhập</p>
-                            <?php } ?>
+                            <?php endif; ?>
+
                             <form action="<?= BASE_URL . '?act=check-login' ?>" method="post">
                                 <div class="single-input-item">
                                     <input type="email" placeholder="Email or Username" name="email" required />

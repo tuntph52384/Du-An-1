@@ -157,7 +157,7 @@
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-12">
-              <input type="submit" class="btn btn-primary" value="Save Changes">
+              <input type="submit" class="btn btn-primary" value="Lưu thay đổi">
             </div>
           </div>
           </form>

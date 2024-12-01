@@ -40,9 +40,16 @@ match ($act) {
     'remove-item' => (new HomeController())->removeFromGioHang($_GET['id']),
 
 
+    
+    'form-them-tai-khoan' => (new HomeController())->formRegister(),
+    'them-tai-khoan' => (new HomeController())->postRegister(),
+
 
 
      // Auth
      'login'=> (new HomeController())-> formLogin(),
      'check-login'=> (new HomeController())-> postLogin(),
+     'logout'=> (new HomeController())-> logout(),
+
+    default => (new HomeController())->home(),
 };

@@ -5,8 +5,8 @@
 <!-- Scroll to Top End -->
 
 <!-- footer area start -->
-<footer class="footer-widget-area" >
-    <div class="footer-top section-padding" style="background-color: gray;">
+<footer class="footer-widget-area">
+    <div class="footer-top section-padding" style="background-color: #333; color: #fff;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -18,19 +18,17 @@
                                 </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-item">
-                        <h6 class="widget-title">
-                            Liên hệ với chúng tôi</h6>
+                        <h6 class="widget-title" style="color: #fff;">Liên hệ với chúng tôi</h6>
                         <div class="widget-body">
                             <address class="contact-block">
                                 <ul>
-                                    <li><i class="pe-7s-home"></i> abc - VietNam</li>
-                                    <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">abc@123.com </a></li>
-                                    <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">(012) 123 456 789-987</a></li>
+                                    <li><i class="pe-7s-home" style="color: #fff;"></i> abc - VietNam</li>
+                                    <li><i class="pe-7s-mail" style="color: #fff;"></i> <a href="mailto:demo@plazathemes.com" style="color: #fff;">abc@123.com </a></li>
+                                    <li><i class="pe-7s-call" style="color: #fff;"></i> <a href="tel:(012)800456789987" style="color: #fff;">(012) 123 456 789-987</a></li>
                                 </ul>
                             </address>
                         </div>
@@ -38,36 +36,37 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="widget-item">
-                        <h6 class="widget-title">Thông tin</h6>
+                        <h6 class="widget-title" style="color: #fff;">Thông tin</h6>
                         <div class="widget-body">
                             <ul class="info-list">
-                                <li><a href="#">Về chúng tôi</a></li>
-                                <li><a href="#">Thông tin giao hàng</a></li>
-                                <li><a href="#">Chính sách riêng tư</a></li>
-                                <li><a href="#">Điều khoản & Điều kiện</a></li>
-                                <li><a href="#">Liên hệ với chúng tôi</a></li>
-                                <li><a href="#">Bản đồ trang web</a></li>
+                                <li><a href="#" style="color: #fff;">Về chúng tôi</a></li>
+                                <li><a href="#" style="color: #fff;">Thông tin giao hàng</a></li>
+                                <li><a href="#" style="color: #fff;">Chính sách riêng tư</a></li>
+                                <li><a href="#" style="color: #fff;">Điều khoản & Điều kiện</a></li>
+                                <li><a href="#" style="color: #fff;">Liên hệ với chúng tôi</a></li>
+                                <li><a href="#" style="color: #fff;">Bản đồ trang web</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-item">
-                        <h6 class="widget-title">Theo dõi chúng tôi</h6>
+                        <h6 class="widget-title" style="color: #fff;">Theo dõi chúng tôi</h6>
                         <div class="widget-body social-link">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube"></i></a>
+                            <a href="#"><i class="fa fa-facebook" style="color: #fff;"></i></a>
+                            <a href="#"><i class="fa fa-twitter" style="color: #fff;"></i></a>
+                            <a href="#"><i class="fa fa-instagram" style="color: #fff;"></i></a>
+                            <a href="#"><i class="fa fa-youtube" style="color: #fff;"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </footer>
 <!-- footer area end -->
+
+
 <!-- JS
 ============================================ -->
 

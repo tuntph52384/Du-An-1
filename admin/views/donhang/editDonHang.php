@@ -76,14 +76,18 @@
                                     <label for="trang_thai_id">Trạng thái đơn hàng</label>
                                     <select id="trang_thai_id" name="trang_thai_id" class="form-control custom-select">
                                         <?php foreach ($listTrangThaiDonHang as $trangThai) : ?>
-                                            <option <?php
-                                                    // Kiểm tra nếu trạng thái đơn hàng đã được chọn là các trạng thái không cho phép thay đổi
-                                                    if (
-                                                        $donHang['trang_thai_id'] >= $trangThai['id'] // Chặn thay đổi nếu trạng thái đã tiến triển
-                                                    ) {
-                                                        echo 'disabled';
-                                                    }
-                                                    ?> <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> value="<?= $trangThai['id']; ?>">
+                                            <option
+                                                <?php
+                                                // Chặn thay đổi nếu trạng thái đã tiến triển hoặc là trạng thái 6
+                                                if (
+                                                    $donHang['trang_thai_id'] >= $trangThai['id'] ||
+                                                    $trangThai['id'] == 6 // Không cho chọn trạng thái 6
+                                                ) {
+                                                    echo 'disabled';
+                                                }
+                                                ?>
+                                                <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?>
+                                                value="<?= $trangThai['id']; ?>">
                                                 <?= $trangThai['ten_trang_thai']; ?>
                                             </option>
                                         <?php endforeach ?>

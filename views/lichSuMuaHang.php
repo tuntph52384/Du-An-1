@@ -2,28 +2,29 @@
 <?php require_once 'layout/menu.php'; ?>
 
 <main>
-    <!-- breadcrumb area start -->
-    <div class="breadcrumb-area">
+     <!-- Main Navigation Bar -->
+     <div class="navbar-main bg-dark text-white py-3 border-bottom">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-wrap">
-                        <nav aria-label="breadcrumb">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<?= BASE_URL ?>"><i class="fa fa-home"></i></a></li>
-
-                                <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
-                            </ul>
-                        </nav>
-                    </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li><a href="<?= BASE_URL ?>" class="text-white breadcrumb-link">
+                                    <i class="fa fa-home"></i> Trang chủ
+                                </a>
+                            </li>
+                            <li class="text-white breadcrumb-link" aria-current="page"> / Lịch sử mua hàng</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-    <!-- breadcrumb area end -->
+
+   
 
     <!-- cart main wrapper start -->
-    <div class="cart-main-wrapper section-padding">
+    <div class="cart-main-wrapper section-padding border-top">
         <div class="container">
             <div class="section-bg-color">
                 <div class="row">
@@ -59,9 +60,9 @@
                                             <td><?= $trangThaiDonHang[$donHang['trang_thai_id']] ?></td>
 
                                             <td>
-                                                <a href="<?= BASE_URL ?>?act=chi-tiet-mua-hang&id=<?= $donHang['id'] ?>" class="btn btn-sqr">Chi tiết đơn hàng</a>
+                                                <a href="<?= BASE_URL ?>?act=chi-tiet-mua-hang&id=<?= $donHang['id'] ?>" class="btn btn-sqr border">Chi tiết đơn hàng</a>
                                                 <?php if ($donHang['trang_thai_id'] == 1) { ?>
-                                                    <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= $donHang['id'] ?>" class="btn btn-sqr" onclick="return confirm('Xác nhận hủy đơn hàng')">Hủy</a>
+                                                    <a href="<?= BASE_URL ?>?act=huy-don-hang&id=<?= $donHang['id'] ?>" class="btn btn-danger border" onclick="return confirm('Xác nhận hủy đơn hàng')">Hủy</a>
                                                 <?php } ?>
 
                                             </td>
@@ -80,5 +81,75 @@
     <!-- cart main wrapper end -->
 </main>
 
-
 <?php require_once 'layout/footer.php'; ?>
+
+<style>
+  
+    
+   
+    /* Tăng cường màu sắc cho bảng đơn hàng */
+    .table th {
+        background-color: #004085;
+        color: #fff;
+        text-align: center;
+        border: 1px solid #dee2e6;
+    }
+
+    .table td {
+        text-align: center;
+        color: #333;
+        border: 1px solid #dee2e6;
+    }
+
+    .table-striped tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Cải thiện màu sắc các nút */
+    .btn-sqr {
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid #28a745;
+    }
+
+    .btn-sqr:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+    /* Nút hủy đơn hàng với màu đỏ */
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+    }
+
+    /* Hiệu ứng khi hover vào các ô trong bảng */
+    .table-striped tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .navbar-secondary .nav-item {
+            margin-right: 15px;
+        }
+
+        .navbar-secondary .nav-link {
+            font-size: 0.9rem;
+        }
+    }
+</style>

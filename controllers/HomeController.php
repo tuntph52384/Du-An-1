@@ -7,6 +7,8 @@ class HomeController
     public $modelGioHang;
     public $modelDonHang;
 
+
+
     public function __construct()
     {
         $this->modelSanPham = new SanPham();
@@ -59,7 +61,6 @@ class HomeController
         require_once './views/auth/formRegister.php';
 
         deleteSessionError();
-
     }
     public function postRegister()
     {
@@ -68,9 +69,9 @@ class HomeController
             $mat_khau = $_POST['mat_khau'] ?? '';
             $ho_ten = $_POST['ho_ten'] ?? '';
             $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-    
+
             $errors = [];
-    
+
             if (empty($email)) {
                 $errors['email'] = 'Email không được bỏ trống';
             }
@@ -83,16 +84,16 @@ class HomeController
             if (empty($so_dien_thoai)) {
                 $errors['so_dien_thoai'] = 'Số điện thoại không được bỏ trống';
             }
-    
+
             $_SESSION['error'] = $errors;
 
-    
+
             if (empty($errors)) {
                 $mat_khau = password_hash($mat_khau, PASSWORD_BCRYPT);
                 $chuc_vu_id = 2;
-    
+
                 $this->modelTaiKhoan->insertTaiKhoan($ho_ten, $email, $mat_khau, $so_dien_thoai, $chuc_vu_id);
-    
+
                 // Lưu thông báo thành công vào session
                 $_SESSION['success'] = "Đăng ký tài khoản thành công!";
                 header("Location: " . BASE_URL . '?act=login');
@@ -104,14 +105,14 @@ class HomeController
             }
         }
     }
-    
+
 
 
     public function logout()
     {
         unset($_SESSION['user_client']);
         header("Location: " . BASE_URL);
-        exit(); 
+        exit();
     }
     public function postLogin()
     {
@@ -443,5 +444,5 @@ class HomeController
             var_dump('Ban chua dang nhap');
             die;
         }
-    }
+    }    
 }

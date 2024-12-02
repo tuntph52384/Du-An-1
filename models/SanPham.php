@@ -83,6 +83,8 @@ class SanPham
             echo "Lỗi" . $e->getMessage();
         }
     }
+
+   
     public function getListSanPhamDanhMuc($danh_muc_id)
     {
         try {
@@ -97,4 +99,7 @@ class SanPham
             echo "Lỗi" . $e->getMessage();
         }
     }
+
+
+  
 }

@@ -13,6 +13,7 @@ require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
 require_once './models/DonHang.php';
 
+
 // Route
 $act = $_GET['act'] ?? '/';
 
@@ -45,11 +46,10 @@ match ($act) {
     'them-tai-khoan' => (new HomeController())->postRegister(),
 
 
-
      // Auth
      'login'=> (new HomeController())-> formLogin(),
      'check-login'=> (new HomeController())-> postLogin(),
      'logout'=> (new HomeController())-> logout(),
 
-    default => (new HomeController())->home(),
+
 };

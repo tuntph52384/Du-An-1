@@ -13,7 +13,7 @@
                                     <i class="fa fa-home"></i> Trang chủ
                                 </a>
                             </li>
-                            <li class="text-white breadcrumb-link" aria-current="page"> / Chi tiết đơn hàng</li>
+                            <li class="text-white breadcrumb-link" aria-current="page"> / Chi tiết sản phẩm</li>
                         </ol>
                     </nav>
                 </div>
@@ -99,7 +99,7 @@
                                                 <?php if ($binhLuan['trang_thai'] == 1): ?>
                                                     <div class="total-reviews mb-4">
                                                         <div class="rev-avatar">
-                                                            <img src="<?= $binhLuan['anh_dai_dien']; ?>" alt="avatar" class="img-fluid rounded-circle">
+                                                            <img src="<?= $binhLuan['anh_dai_dien']; ?>" alt="avatar" class="img-fluid rounded-circle" onerror="this.onerror=null; this.src='https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg'">
                                                         </div>
                                                         <div class="review-box">
                                                             <div class="post-author d-flex align-items-center">
@@ -211,8 +211,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <div class="section-title mb-5">
-                        <h2 class="title">Sản phẩm liên quan</h2>
+                    <div class="" >
+                        <h2 style="color: red;">Sản phẩm liên quan</h2>
+                        <div class="section-line" style="width: 50px; height: 3px; background-color: #e74c3c; margin: 10px auto;"></div>
                     </div>
                 </div>
             </div>
@@ -225,7 +226,7 @@
                                     <div class="product-item shadow-sm rounded p-3 d-flex flex-column" style="display: flex; flex-direction: column; height: 100%;">
                                         <figure class="product-thumb position-relative">
                                             <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=' . $sanPham['id']; ?>" class="d-block">
-                                                <img class="pri-img img-fluid rounded" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product-thumb" style="max-height: 200px; object-fit: cover;">
+                                                <img class=" img-fluid rounded" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" alt="product-thumb" style="max-height: 200px; object-fit: cover;">
                                             </a>
                                         </figure>
                                         <div class="product-details text-center mt-3" style="flex-grow: 1;">

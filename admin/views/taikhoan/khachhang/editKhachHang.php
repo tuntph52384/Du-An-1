@@ -68,7 +68,7 @@
                                         <option <?= $khachHang['gioi_tinh'] == 1 ? 'selected' : '' ?> value="1">Nam</option>
                                         <option <?= $khachHang['gioi_tinh'] !== 1 ? 'selected' : '' ?> value="2">Nữ</option>
                                     </select>
-                                </div>
+                                </div>  
 
 
                                 <div class="form-group">

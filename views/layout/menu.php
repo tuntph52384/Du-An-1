@@ -68,9 +68,11 @@
                                             if (!isset($_SESSION['user_client'])) { ?>
                                                 <li><a href="<?= BASE_URL . '?act=login' ?>" style="color: #f5f5f5;">Đăng nhập</a></li>
                                             <?php } else { ?>
-                                                <li><a href="<?= BASE_URL . '?act=logout' ?>"onclick="return confirm('Đăng xuất tài khoản')" style="color: #f5f5f5;">Đăng xuất</a></li>
+
+                                                <li><a href="<?= BASE_URL . '?act=tai-khoan-ca-nhan' ?>" style="color: #f5f5f5;">Tài khoản cá nhân</a></li>
                                                 
                                                 <li><a href="<?= BASE_URL . '?act=lich-su-mua-hang' ?>" style="color: #f5f5f5;">Đơn hàng</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=logout' ?>"onclick="return confirm('Đăng xuất tài khoản')" style="color: #f5f5f5;">Đăng xuất</a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>

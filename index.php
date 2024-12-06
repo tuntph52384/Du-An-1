@@ -50,6 +50,10 @@ match ($act) {
      'login'=> (new HomeController())-> formLogin(),
      'check-login'=> (new HomeController())-> postLogin(),
      'logout'=> (new HomeController())-> logout(),
-
+    
+     'tai-khoan-ca-nhan'=> (new HomeController())-> taiKhoanCaNhan(),
+     'update-ca-nhan'=> (new HomeController())-> postEditCaNhan(),
+     'doi-mat-khau'=> (new HomeController())-> doiMatKhau(),
+     
 
 };

@@ -60,7 +60,7 @@
     <div class="form-group">
         <label class="col-lg-3 control-label">Email:</label>
         <div class="col-lg-12">
-            <input class="form-control" type="email" name="email" value="<?= $thongTin['email'] ?>" placeholder="Nhập email">
+            <input class="form-control" type="email" name="email" value="<?= $thongTin['email'] ?>" placeholder="Nhập email" readonly>
             <?php if (isset($_SESSION['error']['email'])) { ?>
                 <p class="text-danger"><?= $_SESSION['error']['email'] ?></p>
             <?php } ?>

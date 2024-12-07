@@ -312,7 +312,10 @@ class HomeController
             $tong_tien = $_POST['tong_tien'];
             $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
 
-            $ngay_dat = date('Y-m-d');
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+            $ngay_dat = date('Y-m-d H:i:s');
+
             $trang_thai_id = 1;
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
@@ -364,30 +367,27 @@ class HomeController
 
 
 
-
     public function lichSuMuaHang()
     {
         if (isset($_SESSION['user_client'])) {
             $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
             $tai_khoan_id = $user['id'];
-
+    
             $arrTrangThaiDonHang = $this->modelDonHang->getTrangThaiDonHang();
             $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
-
-
+    
             $arrPhuongThucThanhToan = $this->modelDonHang->getPhuongThucThanhToan();
             $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
-
+    
             $donHangs = $this->modelDonHang->getDonHangFromUser($tai_khoan_id);
-
+    
             require_once './views/lichSuMuaHang.php';
-            // var_dump($donHangs);
-
         } else {
-            var_dump('Ban chua dang nhap');
+            var_dump('Bạn chưa đăng nhập');
             die;
         }
     }
+    
 
     public function chiTietMuaHang()
     {

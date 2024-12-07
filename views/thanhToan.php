@@ -12,6 +12,8 @@
                                     <i class="fa fa-home"></i> Trang chủ
                                 </a>
                             </li>
+                            <li class="text-white breadcrumb-link" aria-current="page"> / Chi tiết sản phẩm</li>
+                            <li class="text-white breadcrumb-link" aria-current="page"> / Giỏ hàng</li>
                             <li class="text-white breadcrumb-link" aria-current="page"> / Thanh toán</li>
                         </ol>
                     </nav>

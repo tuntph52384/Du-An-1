@@ -1,12 +1,11 @@
-<!-- Header -->
-<?= include './views/layout/header.php' ?>
-
+<?php include './views/layout/header.php'; ?>
 <!-- Navbar -->
-<?= include './views/layout/navbar.php' ?>
+<?php include './views/layout/navbar.php'; ?>
+
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<?= include './views/layout/sidebar.php' ?>
+<?php include './views/layout/sidebar.php'; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -63,11 +62,8 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<!-- Footer -->
-<?= include './views/layout/footer.php' ?>
-<!-- End footer -->
-<!-- Page specific script -->
-<!-- Code injected by live-server -->
+<?php include './views/layout/footer.php'; ?>
+
 
 </body>
 

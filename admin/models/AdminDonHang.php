@@ -14,17 +14,16 @@ class AdminDonHang
             $sql = 'SELECT don_hangs.*, trang_thai_don_hangs.ten_trang_thai
                     FROM don_hangs
                     INNER JOIN trang_thai_don_hangs ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
-                ';
-
+                    ORDER BY ngay_dat DESC'; // Thêm ORDER BY theo ngày đặt mới nhất
             $stmt = $this->conn->prepare($sql);
-
             $stmt->execute();
-
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            echo "Lỗi" . $e->getMessage();
+            echo "Lỗi: " . $e->getMessage();
         }
     }
+    
+    
 
     public function getAllTrangThaiDonHang()
     {

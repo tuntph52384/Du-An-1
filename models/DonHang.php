@@ -51,19 +51,19 @@ class DonHang
         }
         
     }
-    public function getDonHangFromUser($taiKhoanId){
+    public function getDonHangFromUser($taiKhoanId) {
         try {
-            $sql = "SELECT * FROM don_hangs WHERE tai_khoan_id = :tai_khoan_id";
+            // Dữ liệu được sắp xếp mới nhất trước
+            $sql = "SELECT * FROM don_hangs WHERE tai_khoan_id = :tai_khoan_id ORDER BY ngay_dat DESC";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "tai_khoan_id" => $taiKhoanId
-
-            ]);
-            return $stmt->fetchAll( PDO::FETCH_ASSOC);
+            $stmt->execute(['tai_khoan_id' => $taiKhoanId]);
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            echo "Lỗi" . $e->getMessage();
+            echo "Lỗi: " . $e->getMessage();
         }
     }
+    
 
     public function getTrangThaiDonHang(){
         try {
